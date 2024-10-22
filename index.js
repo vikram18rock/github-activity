@@ -24,10 +24,12 @@ async function getEvents (username) {
 }
 
 async function printEvents(user) {
+
     const eventData = await getEvents(username);
     let ref;
+
     for (let i = 0; i < eventData.length; i++) {
-        console.log(i);
+
         switch (eventData[i].type) {
             case 'CommitCommentEvent' :
                 console.log(
@@ -130,6 +132,7 @@ async function printEvents(user) {
                     '- Starred ' + eventData[i].repo.name
                 );
                 break;
+
         }
     }
 }
