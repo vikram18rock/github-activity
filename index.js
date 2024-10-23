@@ -23,9 +23,16 @@ async function getEvents (username) {
     return data;
 }
 
-async function printEvents(user) {
+async function printEvents(username) {
 
-    const eventData = await getEvents(username);
+    let eventData;
+    try {
+        eventData = await getEvents(username);
+    } catch (error) {
+        console.error('User', username, 'not Found');
+        return;
+    }
+
     let ref;
 
     for (let i = 0; i < eventData.length; i++) {
@@ -140,4 +147,7 @@ async function printEvents(user) {
 // take input username from arguments
 const username = process.argv[2];
 
-printEvents();
+if (process.argv.length < 3) {
+    console.log("Usage: github-activity <user-name> \nUsername not provided");
+}
+printEvents(username);
